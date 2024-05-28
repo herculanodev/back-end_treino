@@ -1,0 +1,53 @@
+openapi: 3.0.0
+info:
+  title: API Loja Virtual
+  version: 0.1
+tags:
+  - name: produtos
+    description: Operações relacionadas aos produtos da loja
+paths:
+  /produtos:
+    post:
+      tags:
+        - produtos
+      summary: Adiciona um novo produto
+      requestBody:
+        description: Produto a ser adicionado
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Produto'
+      responses:
+        '201':
+          description: Produto criado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Produto'
+        '422':
+          description: Dados do produto inválidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+components:
+  schemas:
+    Produto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID do produto
+        nome:
+          type: string
+          description: Nome do produto
+        preco:
+          type: number
+          format: float
+          description: Preço do produto
+    Mensagem:
+      type: object
+      properties:
+        msg:
+          type: string
